@@ -1,5 +1,5 @@
-FROM node:14.16
+FROM ubuntu:20.04
 WORKDIR /app
 COPY . .
-RUN yarn install --production
+RUN npm install --production
 CMD ["node", "./bin/www"]
