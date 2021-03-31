@@ -2,4 +2,4 @@ FROM node:14.16
 WORKDIR /classwork
 COPY . .
 
-CMD [ "node", "index.js" ]
+CMD [ "node", "index1.js" ]
