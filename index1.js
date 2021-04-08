@@ -1,129 +1,154 @@
-function taskNumber () {
-    let count=1;
-    return function () {
-    console.log(`*************************** Task ${count} ******************************`)
-    count++;
+
+//task1
+class Car {
+    constructor() {
+    this.isStarted = false;
     }
-}
-let task=taskNumber();
-
-task();
-let a='Привет'
-
-function hi (b) {
-return console.log(a+' '+b)
-}
-
-hi('Ivan')
-
-
-task()
-
-console.log(`${welcome}`)
-function welcome (p) {
-    if (p<18) {
-        alert('Привіт!')
+    start () {
+            console.log('the car is started')
+        console.log('woof woof!!')
+       this.isStarted=true;
+    }
+    drive () {
+    if (this.isStarted) {
+    console.log('I drive!!!!!!')
     } else {
-        alert ("Добрий день!")
-    }  
-}
-
-console.log(`${hiGoodDay}`)
-function hiGoodDay () {
-let age = prompt ("Скільки Вам років?", 18);
-welcome(age);
-}
-
-task();
-console.log('ні не спрацює тому що одиницю треба передати в змінну.')
-
-console.log(`${nn}`)
-function nn () {
-let num=1;
-num.toString();
-}
-
-
-task()
-
-console.log(`${toFix}`)
-let num4=3.549533372;
-
-function toFix (n4,n) {
-    n4 = n4.toString().split('')
-    let res='';
-    for (let i=0;i<=n+n4.indexOf('.');i++) {
-        if (n4[i]==undefined) {
-            n4[i]='0';
+    console.log('you must started auto')
+    }
+    }
+    }
+    
+    class Ford extends Car {
+        constructor(brend) {
+            super();
+            this.brend=brend;
         }
-        res+=n4[i]; 
     }
-return res;
-}
-
-
-console.log(num4);
-
-console.log(toFix(num4,5))
-
-task()
-console.log(`${pow}`)
-function pow(numb,degree) {
-    return numb**degree;
+    
+    class Model extends Ford {
+        constructor(brend,model,type) {
+            super(brend)
+            this.model=model;
+            this.type=type;
+        }
+    
     }
-
-
-task()
-
-console.log(`${findEntranceLetter}`)
-let str5='Збігів немає І ТУТ';
-function findEntranceLetter (string,lettter) {
-let count=0;
-for (item of string ) {
-if (item==lettter||item==lettter.toUpperCase()) {
-    count++
-}
-}
-return count
-}
-console.log(`${str5}, результат якщо не враховувати регістр дорівнює ${findEntranceLetter(str5,'і')}`)
-
-task()
-let arrayForSort= [1,4,6,8,9,10,17,13,2,3,5,7,11,12,14,15,18,16,19,20];
-
-console.log(`Є масив ${arrayForSort}`)
- 
-arrayForSort.sort((a,b)=>a-b);
-
-console.log(`Масив після сортування ${arrayForSort}`)
-
-console.log(`Функція сортуюча масив: arrayForSort.sort((a,b)=>a-b)`)
-
-
- 
-task()
-
-let salaries = {
-    "Ivanov":340,
-    "Petrov":400,
-    "Sidorov":900,
-    "Poppov": 1750,
-    "fedorov":1200 
-};
-
-function sumSalaries(sal) {
-    let sum=0;
-    for (let key in sal) {
-        sum+=sal[key]
+    
+    let fordFiesta=new Model('Ford','Fiesta','sedan');
+    console.log(fordFiesta)
+    fordFiesta.drive();
+    
+    //task2
+    
+    class Student {
+        constructor(nameOf,group,scores) {
+            this.nameOf=nameOf;
+            this.group=group;
+            this.scores=scores;
+        }
+        showFIO () {
+          return  this.nameOf+' '+this.group;
+        }
+        middleOfscores () {
+            let res=0;
+            for (let item of this.scores) {
+    res+=item;
+            }
+            return res/this.scores.length
+        }
+        addScore (score) {
+            this.scores.push(score)
+            
+            }
+                
+        }
+    
+    
+    let student=new Student('Vasya','3-N',[3,4,6,5,4,4,3,5]);
+    
+    
+    console.log(student);
+    console.log(student.middleOfscores())
+    //task3
+    class Pupil {
+        constructor(nameOf,group,scores) {
+            this.nameOf=nameOf;
+            this.group=group;
+            this.scores=scores;
+        }
+    
     }
-    return sum;
-}
-obj8()
-console.log(`${sumSalaries}`)
-function obj8 () {
-    for (let key in salaries) {
-        console.log(`${key} : ${salaries[key]} `)
+    
+    let pupilGosha=new Pupil('gosha','3-A',[3,4,5,6,6,4,6,7]);
+    
+    //task4
+    student.showFIO.call(pupilGosha);
+    //task5
+    let boundPupilGosha= student.middleOfscores.bind(pupilGosha);
+    console.log(boundPupilGosha());
+    //task6
+    student.addScore.apply(pupilGosha,[4,5])
+    //task7
+    
+    //task 8
+    
+    function numOnme (num) {
+        try {
+        if (typeof num !== 'number') {
+            throw 'error'
+        }
+        }
+        catch {
+            console.log('Помилка!!!')
+            return false
+        }
+        return true
+        }
+    
+        //task 9
+    
+        let uchni={
+            'sasha':1,
+            'katya':2,
+            'lena':4,
+            'illya':21,
+            'mila':11,
+            [Symbol.iterator]:function* () {
+                for (let key in this) {
+                    yield key
+                }
+            }
+            }  
+        
+    
+    for (let key of uchni) {
+        console.log(key)
     }
-}
-
-console.log(`результат : ${sumSalaries(salaries)}`)
+    
+    //task10
+    const char= function () {
+        let letters=[];
+        for (let i=65;i<=90;i++) {
+            letters.push(String.fromCharCode(i))
+            }
+            for (k=97;k<=122;k++) {
+                letters.push(String.fromCharCode(k))
+            }
+            return letters
+        }();
+    
+    let rendString= function* () {
+           let res='';
+           let ord=0;
+           for (let i=0;i<5;i++) {
+       res+=char[Math.floor(Math.random()*char.length)];
+           }
+           ord=Math.floor(Math.random()*10)+1
+           yield {name:res,order:ord}  
+     }
+    
+    for (let i=0;i<5;i++) {
+     for (let obj of rendString()) {
+         console.log(obj)
+     }
+     }
