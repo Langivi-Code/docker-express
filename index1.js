@@ -144,6 +144,74 @@ d17.parentElement.parentNode.style.color="green"
 d17.style.color='black'//!!!!!!!!!!!!!!!!!!
 
 
+document.querySelector('.b-18').onclick=()=>{
+    let child=document.querySelector('.d-181')
+    document.querySelector('.d-18').removeChild(child)
+}
+
+
+ document.querySelector('.b-181').onclick=()=>{
+    let lastCh=document.querySelector('.o-18').lastElementChild;
+    document.querySelector('.o-18').removeChild(lastCh)
+}
+ 
+let chi=document.querySelector('.o-18').children;
+
+
+for (let el of chi) {
+    let offs=0;
+    el.onclick=()=>{
+        offs+=20;
+        el.style.marginLeft=offs+'px'
+    }
+}
+
+document.querySelector('.b-19').onclick=()=>{
+    let clone=document.querySelector('.i-19');
+   clone.appendChild(clone.cloneNode(true));
+}
+
+let arr20=['andrey','sergey',4,33,'dynamo'];
+
+let ul20= document.createElement("ul");
+
+for(let el of arr20) {
+    ul20.innerHTML+=`<li>${el}</li>`
+}
+
+document.querySelector('.d-20').insertAdjacentElement("afterbegin",ul20);
+
+document.querySelector('.b-21').onclick=()=>{
+  let inp21= document.querySelector('.i-21')
+  let inpClone= inp21.cloneNode();
+  inp21.insertAdjacentElement("afterend",inpClone)
+
+}
+
+let inp22=document.querySelector('.i-22');
+
+inp22.onblur=()=>{
+   let res=inp22.value.split('')
+   inp22.value=res[0]
+   for (let i=res.length-1;i>=1;i--) {
+       let inp222= document.createElement("input")
+       inp222.value=res[i]
+       inp22.insertAdjacentElement("afterend",inp222)
+   }
+  
+}
+
+let b23=document.querySelector('.b-23')
+let d23=document.querySelector('.d-23');
+b23.onclick=function(){
+    d23.insertAdjacentElement("afterend",b23)
+    d23.remove()
+}
+
+
+ 
+
+
 
 
 
