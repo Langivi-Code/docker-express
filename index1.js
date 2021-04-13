@@ -70,7 +70,7 @@ function devide (chisl,znamen) {
     return chisl/znamen
 }
 // task 8
-console.log('мені здається що обидва додатки зроблять очистять робочий простір')
+console.log('мені здається що обидва додатки очистять робочий простір')
 // task 9
 let arr9=['lion','cat','dog','croco','bear','tiger','snake'];
 
@@ -95,6 +95,155 @@ catch(e) {
 
 console.log(inIndex(3));
 console.log(inIndex(9));
+//task10
+
+let timer= document.querySelector('.timer')
+let i=0;
+let timerID;
+
+
+function time () {
+timerID=  setInterval(() => {
+        document.querySelector('#start').setAttribute('disabled','disabled');
+        document.querySelector('#stop').removeAttribute('disabled')
+        i++
+        timer.textContent=i;
+    }, 200);
+}
+
+function stop () {
+    clearInterval(timerID)
+    document.querySelector('#start').removeAttribute('disabled')
+    document.querySelector('#stop').setAttribute('disabled','disabled');
+}
+
+document.querySelector('#start').onclick=time;
+document.querySelector('#stop').onclick=stop;
+document.querySelector('#res').onclick=()=>{
+    i=0
+    timer.textContent=i;
+}
+
+//task 11
+
+let div11=document.querySelector('.d-11');
+function d () {
+let date=new Date;
+setTimeout(() => {
+let hours= date.getHours();
+let min=date.getMinutes();
+let sec=date.getSeconds();
+if (sec<10) {
+    sec='0'+sec;
+}
+if (min<10) {
+    min='0'+min;
+}
+if (hours<10) {
+    hours='0'+hours
+}
+div11.textContent=(`${hours}:${min}:${sec}`)
+}, 1000);
+setTimeout(d,1000)
+}
+document.querySelector('.time').onclick=d;
+//task 12
+let timer1= document.querySelector('.timer1')
+let k=100;
+let timerID1;
+function time1 () {
+    timerID1=  setInterval(() => {
+        if (k==1) {
+            clearInterval(timerID1)
+        }
+            document.querySelector('#start1').setAttribute('disabled','disabled');
+            document.querySelector('#stop1').removeAttribute('disabled')
+            k--
+            timer1.textContent=k;
+        }, 100);
+    }
+    
+    function stop1 () {
+        clearInterval(timerID1)
+        document.querySelector('#start1').removeAttribute('disabled')
+        document.querySelector('#stop1').setAttribute('disabled','disabled');
+        if (k==0) {
+        k=100;
+        timer1.textContent=k;
+        }
+    }
+    
+    document.querySelector('#start1').onclick=time1;
+    document.querySelector('#stop1').onclick=stop1;
+
+//task 13
+
+function* sequence (start=0,step=1) {
+  for(let i=start;i<Infinity;i+=step)
+  yield i;
+
+}
+
+let gen13=sequence();
+console.log(gen13.next())
+
+//task14
+
+// function* gen14 (...arguments) {
+//     for(let i=0;i<arguments.length;i++)
+//     yield arguments[i];
+//     }
+  
+
+//   const gen=gen14(3,4,5,6);
+  
+// function a () {
+//     if (this.next().done) {
+//         return
+//     } else {
+//        return this.next().value*10
+//     }
+// }
+
+
+// function fmap (gener,afunc) {
+//    return afunc(gener)
+//     }
+
+//     let aaa=fmap(gen,a);
+
+
+
+
+
+
+//task15
+
+class User {
+    constructor() {
+        this.firstname=undefined
+        this.surname=undefined
+    }
+    getfullName=function () {
+       return this.firstname+' '+this.surname
+    }
+    setFirstName (val) {
+        this.firstname=val;
+    }
+    setLastName (val) {
+        this.surname=val
+    }
+}
+
+let usr=new User()
+
+
+
+
+
+
+
+
 
 
 
