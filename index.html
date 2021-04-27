@@ -4,26 +4,100 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
-<body>
-    <div class="cont">
-        <div class="timer" style="font-size: 25px;margin: 10px 0 10px 150px;">0</div>
-        <button id="start">запустити таймер</button>
-        <button id="stop" disabled="disabled">зупинити таймер</button>
-        <button id="res">скинути</button>
-        
-    </div>
-    <div class="d-11" style="font-size: 30px;margin-top: 20px;text-align: center;"></div>
-    <button class="time">запустити годинник</button>
 
-    <div class="cont1">
-        <div class="timer1" style="font-size: 25px;margin: 10px 0 10px 120px;">100</div>
-        <button id="start1">запустити таймер</button>
-        <button id="stop1" disabled="disabled">зупинити таймер</button>
-        
+<div class="coor" style="width: 190px;height: 100px;border: 20px solid yellow;margin: 50px;"></div>
+<div class="d2"></div>  
+
+<button class="modal">modal window</button>
+<div class="window hide"></div>
+<div class="ramka hide">
+    <div class="txt">Введите что нибудь умное))</div>
+    <input tabindex="1" type="text" class="inp tab">
+    <button tabindex="2" class="ok tab">ok</button>
+    <button tabindex="3" class="cancel tab">cancel</button>
+</div>
+    <hr>
+<form action="" class="forma">
+    <table class="calc">
+        <tbody>
+ <tr>
+     <th>Депозитный калькулятор</th>
+ </tr>
+ <tr>
+     <td>Первоначальный депозит</td>
+     <td><input type="number" class="first" value="10000"></td>
+ </tr>
+ <tr>
+     <td>Срок вклада?</td>
+     <td><select name="srok" id="srok" style="width: 165px;">
+         <option value="0.25">3 минимум</option>
+         <option value="0.5">6 полгода</option>
+         <option value="1">12 год</option>
+         <option value="1.5">18 полтора</option>
+         <option value="2">24 месяца</option>
+         <option value="3">36 месяцев</option>
+         <option value="5">60 (пять лет)</option>
+     </select></td>
+ </tr>
+ <tr>
+     <td>Годовая процентная ставка?</td>
+     <td><input type="number" class="perc" value="0"></td>
+ </tr>
+ 
+        </tbody>
+    </table>
+</form>
+<table class="picture">
+    <tbody>
+        <tr>
+            <td>было</td>
+            <td>станет</td>
+        </tr>
+        <tr class="sum">
+            <td><div id="bilo" value="100">10000</div></td>
+            <td><div id="stalo" value="100">10000</div></td>
+        </tr>
+        <tr>
+            <td id="red"><div class="red" style="background-color: red; width: 40px; height: 150px;"></div></td>
+            <td id="green"><div class="green" style="background-color: green; width: 40px; height: 150px;" ></div></td>
+        </tr>
+    </tbody>
+</table>
+<hr>
+<div class="p7">
+ 
+<div class="t-7"></div>
+    <textarea name="text" cols="30" rows="10" class="t-71 hide"></textarea>
     </div>
+    <hr>
+
+    <table class="redaxtable">
+ <caption><strong>редагована таблиця</strong></caption>
+        <tr>
+            <td style="background-color: red;">Lorem ipsum, dolor sit amet <br> consectetur <br> adipisicing <br> elit.</td>
+            
     
-    <script src="index1.js"></script>
+            <td style="background-color: greenyellow;">Lorem ipsum, dolor sit amet <br> consectetur <br> adipisicing <br> elit.</td></td>
+            <td style="background-color: green;">Lorem ipsum, dolor sit amet <br> consectetur <br> adipisicing <br> elit.</td></td>
+        </tr>
+        <tr>
+            <td style="background-color:aqua;">Lorem ipsum, dolor sit amet <br> consectetur <br> adipisicing <br> elit.</td>
+            <td style="background-color: gray;">Lorem ipsum, dolor sit amet <br> consectetur <br> adipisicing <br> elit.</td></td>
+            <td style="background-color:lightblue;">Lorem ipsum, dolor sit amet <br> consectetur <br> adipisicing <br> elit.</td></td>
+        </tr>
+        <tr>
+            <td style="background-color:brown;">Lorem ipsum, dolor sit amet <br> consectetur <br> adipisicing <br> elit.</td>
+            <td style="background-color:burlywood;">Lorem ipsum, dolor sit amet <br> consectetur <br> adipisicing <br> elit.</td></td>
+            <td style="background-color: khaki;">Lorem ipsum, dolor sit amet <br> consectetur <br> adipisicing <br> elit.</td></td>
+        </tr>
+    </table>
+
+    <div class="move"></div>
+
+
+<script src="index1.js"></script>
 </body>
 </html>

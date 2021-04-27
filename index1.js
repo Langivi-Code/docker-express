@@ -1,241 +1,258 @@
 
 //task1
+ console.log( 'document.querySelector(#age-table)')
+ console.log('document.querySelectorAll(#age-table label)')//3 label
+ console.log('document.querySelector(td)') //first td
+ console.log('document.querySelector(form[name=search])')//form search
+ console.log('document.querySelector(form[name=search] input)')//inp
+ console.log('document.querySelectorAll(form[name=search] input)[length-1]')//search
 
-let user= {
-name:'Boris',
-lastname:'Ivanov',
-age:35
+ //task2
+
+let t2= document.querySelector('.coor');
+
+let coor= t2.getBoundingClientRect();
+let vnverh=`внешний верхний = x:${coor.x} y:${coor.y}`;
+let vnniz=`внешний нижний = x:${coor.x+coor.width} y:${coor.y+coor.height}`;
+let vnutverh=`внутренний верхний = x:${coor.x+t2.clientLeft} y:${coor.y+t2.clientTop}`;
+let vnutniz=`внутренний нижний = x:${coor.x+coor.width-t2.clientLeft} y:${coor.y+coor.height-t2.clientTop}`
+console.log(vnverh);
+console.log(vnniz);
+console.log(vnutverh)
+console.log (vnutniz)
+
+t2.onmousemove=(e)=>{
+document.querySelector('.d2').textContent=e.clientX+' '+e.clientY;
 }
 
-function fullName () {
-    return this.name+' '+this.lastname;
-}
-
-function detail () {
-    return (`${this.lastname} ${this.name} возраст ${this.age} лет.`)
-}
-
-
-const boundPrintDetails=detail.bind(user);
-const boundPrintFullName=fullName.bind(user);
-user.printFullName=boundPrintFullName;
-user.printDetails=boundPrintDetails;
-
-console.log(user.printFullName());
-console.log(user.printDetails());
-
-//task2
-
-let timerId;
-let printNumbers=function (from,to) {
-    if (typeof from !='number' || typeof to !='number') {
-        throw new Error ('Ошибка!!!')
-    }
-   timerId=setInterval(() => {
-       console.log(from)
-       from++;
-       if (from>to) {
-        clearInterval(timerId)
-    }
-   }, 1000);
-};
-
-
-let recurSetTime=function(from,to) {
- setTimeout(() => {
-    console.log(from)
-    from++
-    if (from<=to) {
-        setTimeout(recurSetTime(from,to),1000);
-    }   
-}, 1000);
-
-}
-
-// recurSetTime(3,8);*************************************
 //task3
 
-console.log("Перший console показує Aurelio De rosa тому що контекст на своєму місці, а другий test = Undefined тому що this не визначено ")
-//task4  
-console.log(" console.log(test.bind(obj.prop)())")
-//task5
-console.log( 'sayName.call(dog)');
-//task6
-console.log('getUserData.call(userData),getUserData.apply(userData)');
-//task 7
-function devide (chisl,znamen) {
-    if (znamen==0) {
-        throw new Error ("Помилка, спроба поділити на 0")
+let d2=document.querySelector('.d2');
+d2.style.cssText="border:1px solid black";
+
+function positionFixed (anchor,position,elem) {
+    let cord=anchor.getBoundingClientRect();
+    elem.style.position='fixed';
+    if (position=='top') {
+        elem.style.top=cord.y-anchor.clientTop+'px'
+        elem.style.left=cord.x+'px';
+    } else if (position=='bottom') {
+        elem.style.top=coor.bottom+'px';
+        elem.style.left=cord.x+'px';
+    } else if (position=="right") {
+        elem.style.top=coor.bottom/2+(anchor.clientTop/2)+'px';
+        elem.style.left=coor.right+'px';
     }
-    return chisl/znamen
+
 }
-// task 8
-console.log('мені здається що обидва додатки очистять робочий простір')
-// task 9
-let arr9=['lion','cat','dog','croco','bear','tiger','snake'];
 
+//task4 ans task5
 
-function inIndex (index) {
-    try {
-    if (index>=arr9.length||index<0) {
-        throw new TypeError()
+positionAbsolute (t2,"bottom-in",d2);
+
+let body= document.querySelector('body');
+body.style.height='2000px';
+
+function positionAbsolute (anchor,position,elem) {
+    let cord=anchor.getBoundingClientRect();
+    elem.style.position='absolute';
+    if (position=='top'||position=="top-out") {
+        elem.style.top=cord.y-anchor.clientTop+'px'
+        elem.style.left=cord.x+'px';
+    } else if (position=='bottom'||position=="bottom-out") {
+        elem.style.top=coor.bottom+'px';
+        elem.style.left=cord.x+'px';
+    } else if (position=="right"||position=="right-out") {
+        elem.style.top=coor.bottom/2+(anchor.clientTop/2)+'px';
+        elem.style.left=coor.right+'px';
+    } else if (position=="top-in") {
+        elem.style.top=cord.y+anchor.clientTop+'px';
+        elem.style.left=cord.x+anchor.clientLeft+'px';
+    } else if (position=="bottom-in") {
+        elem.style.top=coor.bottom-anchor.clientTop*2+'px';
+        elem.style.left=cord.x+anchor.clientLeft+'px';
+    } else if (position=="right-in") {
+        elem.style.top=coor.bottom-anchor.clientTop*2+'px';
+        elem.style.left=cord.width-elem.clientWidth+'px';
     }
-   for (let i=0;i<arr9.length;i++) {
-       if (index==i) {
-         console.log(`показую ${arr9[i]}`)
-       }
 
+}
+
+//task6
+
+let inp=document.querySelector('.inp');
+let win=document.querySelector('.window');
+let modal=document.querySelector('.ramka');
+
+function ok () {
+    win.classList.add('hide');
+    modal.classList.add('hide');
+    alert (`вы ввели:${inp.value}`);
+    inp.value="";
+    body.classList.remove('owerflow')
+}
+
+let tabex=document.querySelectorAll('.tab');
+modal.onkeydown=(e)=>{
+    if (e.code=="Escape") {
+        cnx();
+    } else if (e.code=="Enter") {
+        ok();
+    } 
+    
+}
+
+function cnx () {
+    win.classList.add('hide');
+    modal.classList.add('hide');
+    alert (`вы ввели:${null}`);
+    inp.value="";
+    body.classList.remove('owerflow')
+ 
+}
+
+document.querySelector('.modal').onclick=()=>{
+    win.classList.remove('hide');
+    modal.classList.remove('hide');
+    body.classList.add('owerflow')
+    inp.focus();
+}
+
+document.querySelector('.ok').onclick=ok;
+document.querySelector('.cancel').onclick=cnx;
+//task 7
+
+let firstinvest=document.querySelector('.first');
+let srok=document.querySelector('#srok');
+let percent=document.querySelector('.perc');
+let bilo=document.querySelector('#bilo');
+let stalo=document.querySelector('#stalo');
+let green=document.querySelector('.green');
+let greenHeight=green.offsetHeight;
+
+
+firstinvest.oninput=calc;
+srok.onchange=calc;
+percent.oninput=calc;
+
+function calc () {
+    stalo.value=(Number(firstinvest.value)*Number(percent.value)/100)*Number(srok.value)+Number(firstinvest.value);
+    bilo.textContent=firstinvest.value;
+    bilo.value=firstinvest.value;
+    stalo.textContent=stalo.value;
+    green.style.height=(+stalo.value/+bilo.value)*greenHeight+'px';  
+    
+}
+//task8
+
+let div7=document.querySelector('.t-7');
+let txtarea=document.querySelector('.t-71');
+let parent7=document.querySelector('.p7');
+
+function changeField () {
+  txtarea.classList.remove('hide');
+  txtarea.focus();
+  txtarea.value=div7.textContent;
+}
+
+
+
+function blur () {
+    txtarea.classList.add('hide');
+    div7.innerHTML=`<pre>${txtarea.value}</pre>`;
+    div7.style.color="red";
+}
+
+div7.onclick=changeField;
+txtarea.onblur=blur;
+txtarea.onkeydown=(e)=>{
+    if (e.code=="Enter") {
+        blur();
+    }
+}
+
+// task 9не сделал не пойму каким образом мне сделать так чтобы онклик когда попадает на редактируемую ячейку не реагировал больше не на что пока я не нажму ок или cancel
+
+let table=document.querySelector('.redaxtable');
+let cells=table.getElementsByTagName('td');
+
+
+let txtArea=document.createElement('textarea');
+let butOk=document.createElement('button');
+let butCnx=document.createElement('button');
+
+ function changeCell () {
+txtArea.style.width=this.offsetWidth+'px';
+txtArea.style.height=this.offsetHeight+'px';
+txtArea.classList.add('ttt');
+txtArea.value=this.closest('td').innerHTML;
+this.appendChild(txtArea);
+txtArea.focus();
+txtArea.insertAdjacentElement("afterend",butOk);
+txtArea.insertAdjacentElement("afterend",butCnx);
+ }
+
+ butOk.classList.add('but');
+ butCnx.classList.add('but1');
+ butOk.textContent='OK'
+ butCnx.textContent='CANCEL';
+
+
+    
+
+
+for (cell of cells) {
+    cell.onclick=changeCell;
+    }
+    
+    
+
+
+
+    
+    
+
+    //task 10
+
+    let moveS=document.querySelector('.move');
+ 
+   moveS.onclick=()=>{
+moveS.classList.add('moveactive');
+moveS.textContent="active";
+moveS.setAttribute('tabindex',0);
+moveS.focus();
    }
 
-}
-catch(e) {
-    console.error(`${e} введіть індекс від 0 до ${arr9.length}`)
-}
-}
+   moveS.onblur=()=>{
+    moveS.classList.remove('moveactive');
+    moveS.textContent="";
+   }
 
-console.log(inIndex(3));
-console.log(inIndex(9));
-//task10
+   let leftDiv=moveS.offsetWidth/2;
+   let upDiv=moveS.offsetHeight/2;
 
-let timer= document.querySelector('.timer')
-let i=0;
-let timerID;
-
-
-function time () {
-timerID=  setInterval(() => {
-        document.querySelector('#start').setAttribute('disabled','disabled');
-        document.querySelector('#stop').removeAttribute('disabled')
-        i++
-        timer.textContent=i;
-    }, 200);
-}
-
-function stop () {
-    clearInterval(timerID)
-    document.querySelector('#start').removeAttribute('disabled')
-    document.querySelector('#stop').setAttribute('disabled','disabled');
-}
-
-document.querySelector('#start').onclick=time;
-document.querySelector('#stop').onclick=stop;
-document.querySelector('#res').onclick=()=>{
-    i=0
-    timer.textContent=i;
-}
-
-//task 11
-
-let div11=document.querySelector('.d-11');
-function d () {
-let date=new Date;
-setTimeout(() => {
-let hours= date.getHours();
-let min=date.getMinutes();
-let sec=date.getSeconds();
-if (sec<10) {
-    sec='0'+sec;
-}
-if (min<10) {
-    min='0'+min;
-}
-if (hours<10) {
-    hours='0'+hours
-}
-div11.textContent=(`${hours}:${min}:${sec}`)
-}, 1000);
-setTimeout(d,1000)
-}
-document.querySelector('.time').onclick=d;
-//task 12
-let timer1= document.querySelector('.timer1')
-let k=100;
-let timerID1;
-function time1 () {
-    timerID1=  setInterval(() => {
-        if (k==1) {
-            clearInterval(timerID1)
+    document.addEventListener('keydown',function(e) {
+        if (moveS.classList.contains('moveactive')) {
+        if (e.code=="ArrowRight") {
+            moveS.style.left=leftDiv+'px';
+            leftDiv+=moveS.offsetWidth/2;
+        } else if (e.code=="ArrowUp") {
+            moveS.style.bottom=upDiv+'px';
+            upDiv+=moveS.offsetHeight/2;
+        } else if (e.code=="ArrowDown") {
+            upDiv-=moveS.offsetHeight/2;
+            moveS.style.bottom=upDiv-moveS.offsetHeight+'px';
+        } else if (e.code=="ArrowLeft") {
+            leftDiv-=moveS.offsetWidth/2;
+            moveS.style.left=leftDiv-moveS.offsetWidth+'px';
         }
-            document.querySelector('#start1').setAttribute('disabled','disabled');
-            document.querySelector('#stop1').removeAttribute('disabled')
-            k--
-            timer1.textContent=k;
-        }, 100);
-    }
-    
-    function stop1 () {
-        clearInterval(timerID1)
-        document.querySelector('#start1').removeAttribute('disabled')
-        document.querySelector('#stop1').setAttribute('disabled','disabled');
-        if (k==0) {
-        k=100;
-        timer1.textContent=k;
         }
-    }
-    
-    document.querySelector('#start1').onclick=time1;
-    document.querySelector('#stop1').onclick=stop1;
-
-//task 13
-
-function* sequence (start=0,step=1) {
-  for(let i=start;i<Infinity;i+=step)
-  yield i;
-
-}
-
-let gen13=sequence();
-console.log(gen13.next())
-
-//task14
-
-// function* gen14 (...arguments) {
-//     for(let i=0;i<arguments.length;i++)
-//     yield arguments[i];
-//     }
-  
-
-//   const gen=gen14(3,4,5,6);
-  
-// function a () {
-//     if (this.next().done) {
-//         return
-//     } else {
-//        return this.next().value*10
-//     }
-// }
-
-
-// function fmap (gener,afunc) {
-//    return afunc(gener)
-//     }
-
-//     let aaa=fmap(gen,a);
+    })
 
 
 
 
 
-
-//task15
-
-class User {
-    constructor() {
-        this.firstname=undefined
-        this.surname=undefined
-    }
-    getfullName=function () {
-       return this.firstname+' '+this.surname
-    }
-    setFirstName (val) {
-        this.firstname=val;
-    }
-    setLastName (val) {
-        this.surname=val
-    }
-}
-
-let usr=new User()
 
 
 
